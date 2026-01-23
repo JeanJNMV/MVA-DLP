@@ -1,36 +1,41 @@
 \documentclass[12pt,a4paper]{article}
 
+% Encoding and language
+\usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{alphabeta} 
 
-\usepackage[pdftex]{graphicx}
-\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+% Graphics and layout
+\usepackage{graphicx}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
 
+% Spacing
 \linespread{1.06}
 \setlength{\parskip}{8pt plus2pt minus2pt}
 
-\widowpenalty 10000
-\clubpenalty 10000
+% Prevent widows and orphans
+\widowpenalty=10000
+\clubpenalty=10000
 
+% Custom commands
 \newcommand{\eat}[1]{}
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
+% Utilities
 \usepackage[official]{eurosym}
 \usepackage{enumitem}
-\setlist{nolistsep,noitemsep}
+\setlist{noitemsep}
 \usepackage[hidelinks]{hyperref}
-\usepackage{cite}
 \usepackage{lipsum}
-\usepackage{subfigure}
 \usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{float}
 
+% Math
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage{booktabs}
-
 \usepackage{amsfonts}
+\usepackage{amsthm}
 
 \begin{document}
 \pagenumbering{arabic} % start numbering
@@ -43,11 +48,153 @@
     \today
 \end{center}
 
-\section*{Problem 1: Multi-Classification Problem}
+\section{Multi-Classification Problem}
 
-\section*{Problem 2: Regression Problem}
+\section{Regression Problem}
 
-\section*{Observations and Trade-offs to Consider When Training Deep Learning Models}
+\section{Observations and Trade-offs to Consider When Training Deep Learning Models}
+
+\newpage
+
+\appendix
+\section{Problem 1: Results for Different Hyperparameters}
+
+The symbol $^*$ indicates the value used in the default configuration.
+
+\textbf{Impact of the number of layers:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Number of Layers} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        1 & 98.57 & 96.82 & 7.91 \\
+        $2^*$ & 99.08 & 97.44 & 14.52 \\
+        3 & 99.22 & 97.37 & 18.26 \\
+        5 & 97.83 & 96.90 & 24.69 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Impact of the number of neurons in hidden layers:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Hidden Layer Size} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        8 & 97.72 & 96.13 & 11.62 \\
+        $16^*$ & 99.08 & 97.44 & 14.52 \\
+        32 & 99.68 & 98.14 & 18.94 \\
+        64 & 99.90 & 98.92 & 29.29 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Impact of the activation function:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Activation Function} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        $\text{ReLU}^*$ & 99.08 & 97.44 & 14.52 \\
+        Sigmoid & 96.83 & 94.58 & 14.28 \\
+        Tanh & 99.72 & 97.60 & 14.79 \\
+        Leaky ReLU & 98.77 & 97.37 & 14.39 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Impact of the batch size:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Batch Size} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        16 & 99.62 & 98.76 & 18.74 \\
+        32 & 99.05 & 96.82 & 15.78 \\ 
+        $64^*$ & 99.08 & 97.44 & 14.52 \\
+        128 & 98.18 & 96.59 & 13.57 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Impact of the learning rate:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Learning Rate} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        $0.001^*$ & 99.08 & 97.44 & 14.52 \\
+        0.01 & 99.43 & 98.14 & 14.36 \\
+        0.1 & 16.23 & 17.04 & 14.21 \\
+        1 & 16.23 & 17.04 & 14.34 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Impact of the number of epochs:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Number of Epochs} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        10 & 97.27 & 95.82 & 4.87 \\
+        $30^*$ & 99.08 & 97.44 & 14.52 \\
+        50 & 99.50 & 97.68 & 24.05 \\
+        100 & 99.50 & 97.13 & 47.41 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Impact of the optimizer:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Optimizer} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        $\text{Adam}^*$ & 99.08 & 97.44 & 14.52 \\
+        RMSprop & 99.17 & 97.29 & 14.27 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textbf{Impact of the loss function:}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c|}
+        \hline
+        \textbf{Loss Function} & \textbf{Train Accuracy (\%)} &
+        \textbf{Validation Accuracy (\%)} & \textbf{Train Time (s)} \\
+        \hline\hline
+        $\text{MSE}^*$ & 99.08 & 97.44 & 14.52 \\
+        Cross-Entropy & 99.05 & 97.68 & 14.35 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\section{Problem 2: Results for Different Hyperparameters}
+
 
 
 
